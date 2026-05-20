@@ -17,7 +17,9 @@ public class BaseTest {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions().setHeadless(false)
         );
+        page = browser.newPage();
+        page.navigate("https://think-and-get-it-frontend.onrender.com/home");
 
-        page = browser.newContext().newPage();
+
     }
 }
