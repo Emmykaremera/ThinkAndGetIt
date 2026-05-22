@@ -22,4 +22,10 @@ public class ShopNowPage {
     public Locator getSortDropdown() {
         return page.locator("select.input.cursor-pointer");
     }
+
+    public void addFirstProduct() {
+        page.locator("button:has-text('Add to Cart')")
+                .first()
+                .click();
+    }
 }
