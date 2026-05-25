@@ -1,16 +1,18 @@
 package base;
+
 import com.microsoft.playwright.*;
+
+import com.microsoft.playwright.*;
+import org.junit.AfterClass;
 import org.testng.annotations.BeforeClass;
 import utils.ConfigReader;
 import utils.Endpoints;
 
 public class BaseTest {
 
-    protected Playwright playwright;
-
-    protected Browser browser;
-
-    protected Page page;
+    protected static Playwright playwright;
+    protected static Browser browser;
+    protected static Page page;
 
     @BeforeClass
     public void setup() {
@@ -18,16 +20,23 @@ public class BaseTest {
         playwright = Playwright.create();
 
         browser = playwright.chromium().launch(
-
-                new BrowserType.LaunchOptions()
-                        .setHeadless(false)
+                new BrowserType.LaunchOptions().setHeadless(false)
         );
 
         page = browser.newPage();
 
-        page.navigate(
-                ConfigReader.getProperty("base.url")
-                        + Endpoints.HOME
-        );
+        String baseUrl = ConfigReader.getProperty("base.url");
+
+        page.navigate(baseUrl + Endpoints.HOME);
     }
+
+//    @AfterClass
+//    public static void tearDown() {
+//
+//        page.close();
+//
+//        browser.close();
+//
+//        playwright.close();
+//    }
 }
