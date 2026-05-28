@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import com.microsoft.playwright.Locator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
@@ -8,10 +9,12 @@ import pages.ShopNowPage;
 import pages.CartPage;
 import utils.TestData;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class CartTest extends BaseTest {
 
     @Test
-    public void addToCartTest() {
+    public static void addToCartTest() {
 
         LoginPage loginPage = new LoginPage(page);
         ShopNowPage shopNowPage = new ShopNowPage(page);
@@ -22,15 +25,14 @@ public class CartTest extends BaseTest {
                 TestData.PASSWORD
         );
 
+
         shopNowPage.clickShopNow();
 
         cartPage.addFirstProductToCart();
 
-        cartPage.openCart();
 
-        Assert.assertTrue(
-                cartPage.getCartItems().count() > 0,
-                "Cart is empty"
-        );
+        Locator cartItem = page.getByText("Clear PVC Stadium Tote Bag");
+        assertThat(cartItem).isVisible();
+
     }
 }

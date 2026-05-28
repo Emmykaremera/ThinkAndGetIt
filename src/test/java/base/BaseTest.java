@@ -12,7 +12,7 @@ public class BaseTest {
 
     protected static Playwright playwright;
     protected static Browser browser;
-    protected static Page page;
+    public static Page page;
 
     @BeforeClass
     public void setup() {
@@ -27,7 +27,7 @@ public class BaseTest {
 
         String baseUrl = ConfigReader.getProperty("base.url");
 
-        page.navigate(baseUrl + Endpoints.HOME);
+        page.navigate(baseUrl);
     }
 
 //    @AfterClass
